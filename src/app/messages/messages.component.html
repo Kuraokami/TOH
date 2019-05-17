@@ -1,0 +1,14 @@
+<div class="messagesContainer">
+  <div class="card">
+    <div class="card-header">
+      <h4 class="">Messages</h4>
+      <button class="btn btn-outline-primary float-right" (click)="messageService.clear()">Clear</button>
+    </div>
+
+    <div class="card-body" *ngIf="messageService.messages.length">
+      <div *ngFor='let message of messageService.messages' class="alert alert-primary"> {{message}} </div>
+    </div>
+
+  </div>
+
+</div>
