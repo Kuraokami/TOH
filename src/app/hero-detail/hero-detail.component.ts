@@ -21,25 +21,25 @@ export class HeroDetailComponent implements OnInit, OnChanges, OnDestroy {
     private heroService: HeroService,
     private location: Location) {
 
-      this.navigationSub = this.router.events.subscribe(
-        (e:any) => {
-          if (e instanceof NavigationEnd){
-            this.reInitialize();
-          }
+    this.navigationSub = this.router.events.subscribe(
+      (e: any) => {
+        if (e instanceof NavigationEnd) {
+          this.reInitialize();
         }
-      );
-     }
-
-     ngOnDestroy() {
-      // avoid memory leaks here by cleaning up after ourselves. If we
-      // don't then we will continue to run our initialiseInvites()
-      // method on every navigationEnd event.
-      if (this.navigationSub) {
-         this.navigationSub.unsubscribe();
       }
-    }
+    );
+  }
 
-  private reInitialize(){
+  ngOnDestroy() {
+    // avoid memory leaks here by cleaning up after ourselves. If we
+    // don't then we will continue to run our initialiseInvites()
+    // method on every navigationEnd event.
+    if (this.navigationSub) {
+      this.navigationSub.unsubscribe();
+    }
+  }
+
+  private reInitialize() {
     this.getHero();
   }
   ngOnInit(): void {
@@ -55,10 +55,10 @@ export class HeroDetailComponent implements OnInit, OnChanges, OnDestroy {
     this.heroService.getHero(id).subscribe(hero => this.hero = hero);
   }
 
-  save(){
+  save() {
     this.heroService.updateHero(this.hero).subscribe(() => this.goBack());
   }
-  goBack(){
+  goBack() {
     this.location.back();
   }
 
